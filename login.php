@@ -14,7 +14,8 @@ if (isset($_POST['login'])) {
         $_SESSION['username'] = $username;
         
         $q_admin = $koneksi->prepare("SELECT * FROM admin WHERE username=?");
-        $q_admin->bind_param("s", $username)
+        $q_admin->bind_param("s", $username);
+        $q_admin->execute();
         if (mysqli_num_rows($q_admin) > 0) {
             $_SESSION['role'] = 'admin';
             header("Location: admin.php");
