@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibliotheca - Perpustakaan Digital Mewah</title>
+    <title>Perpustakaan PWEB</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Particle Background -->
     <canvas id="particleCanvas"></canvas>
-
-    <!-- Header -->
     <header class="header">
         <div class="container header-content">
             <div class="logo">
-                <h1>Bibliotheca</h1>
+                <h1>Perpustakaan PWEB</h1>
                 <p class="tagline">Digital Library</p>
             </div>
             
@@ -46,16 +43,14 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
-                <button id="loginBtn" class="login-btn">Masuk</button>
+                <button id="loginBtn" class="login-btn">Login</button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="container">
             <div class="content-wrapper">
-                <!-- Sidebar -->
                 <aside class="sidebar">
                     <div class="filter-section">
                         <h3 class="filter-title">Filter</h3>
@@ -85,17 +80,6 @@
                         </div>
 
                         <div class="filter-group">
-                            <label class="filter-label">Rating Minimal</label>
-                            <select id="ratingFilter" class="filter-select">
-                                <option value="">Semua Rating</option>
-                                <option value="4.5">4.5+ ⭐</option>
-                                <option value="4.0">4.0+ ⭐</option>
-                                <option value="3.5">3.5+ ⭐</option>
-                                <option value="3.0">3.0+ ⭐</option>
-                            </select>
-                        </div>
-
-                        <div class="filter-group">
                             <label class="filter-label">Urutkan</label>
                             <select id="sortFilter" class="filter-select">
                                 <option value="newest">Terbaru</option>
@@ -108,31 +92,26 @@
                     </div>
                 </aside>
 
-                <!-- Book Grid -->
                 <section class="book-grid-section">
                     <div class="section-header">
                         <h2 class="section-title">Koleksi Buku</h2>
                         <p id="bookCount" class="book-count">Menampilkan 0 buku</p>
                     </div>
                     <div id="bookGrid" class="book-grid">
-                        <!-- Books will be populated by JavaScript -->
                     </div>
                 </section>
             </div>
         </div>
     </main>
 
-    <!-- Modal Detail Buku -->
     <div id="bookModal" class="modal">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
             <div id="modalBody" class="modal-body">
-                <!-- Modal content will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
-    <!-- Modal Login -->
     <div id="loginModal" class="modal">
         <div class="modal-content login-modal">
             <button class="modal-close" id="closeLogin">&times;</button>
@@ -152,10 +131,9 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Bibliotheca. All rights reserved.</p>
+            <p>&copy; 2025 Perpustakaan PWEB. All rights reserved.</p>
             <div class="footer-links">
                 <a href="#tentang">Tentang</a>
                 <a href="#kontak">Kontak</a>

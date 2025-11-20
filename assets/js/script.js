@@ -6,7 +6,6 @@ const booksData = [
         author: "Matt Haig",
         genre: "Fiction",
         year: 2020,
-        rating: 4.5,
         description: "Sebuah novel tentang kehidupan, kematian, dan segala kemungkinan di antaranya. Nora Seed menemukan perpustakaan misterius yang berisi buku-buku tentang kehidupan alternatif yang mungkin dia jalani."
     },
     {
@@ -15,7 +14,6 @@ const booksData = [
         author: "Tara Westover",
         genre: "Biography",
         year: 2018,
-        rating: 4.7,
         description: "Memoar yang menakjubkan tentang seorang wanita muda yang, meskipun tidak pernah memasuki ruang kelas, belajar sendiri cukup untuk masuk ke universitas bergengsi, dan akhirnya mendapatkan PhD dari Cambridge University."
     },
     {
@@ -24,71 +22,7 @@ const booksData = [
         author: "Yuval Noah Harari",
         genre: "Non-Fiction",
         year: 2024,
-        rating: 4.6,
         description: "Sebuah eksplorasi radikal tentang sejarah umat manusia dari zaman batu hingga abad ke-21, menggali bagaimana Homo sapiens menjadi spesies dominan di planet ini."
-    },
-    {
-        id: 4,
-        title: "The Silent Patient",
-        author: "Alex Michaelides",
-        genre: "Mystery",
-        year: 2023,
-        rating: 4.3,
-        description: "Thriller psikologis yang mencengkeram tentang seorang wanita yang menembak suaminya lima kali dan kemudian tidak pernah berbicara lagi, dan psikoterapis yang terobsesi untuk mengungkap kebenarannya."
-    },
-    {
-        id: 5,
-        title: "Atomic Habits",
-        author: "James Clear",
-        genre: "Non-Fiction",
-        year: 2018,
-        rating: 4.8,
-        description: "Panduan praktis untuk membangun kebiasaan baik dan menghilangkan yang buruk. Buku ini menawarkan strategi yang terbukti untuk membentuk kebiasaan yang mengubah hidup Anda."
-    },
-    {
-        id: 6,
-        title: "Project Hail Mary",
-        author: "Andy Weir",
-        genre: "Science",
-        year: 2022,
-        rating: 4.6,
-        description: "Petualangan fiksi ilmiah tentang seorang astronot yang terbangun di pesawat luar angkasa tanpa ingatan tentang siapa dia atau misinya untuk menyelamatkan umat manusia."
-    },
-    {
-        id: 7,
-        title: "Where the Crawdads Sing",
-        author: "Delia Owens",
-        genre: "Fiction",
-        year: 2018,
-        rating: 4.4,
-        description: "Novel yang menyentuh tentang Kya Clark, gadis rawa yang tumbuh sendirian di pedalaman North Carolina, dan misteri pembunuhan yang mengguncang kota kecil mereka."
-    },
-    {
-        id: 8,
-        title: "The Psychology of Money",
-        author: "Morgan Housel",
-        genre: "Non-Fiction",
-        year: 2020,
-        rating: 4.5,
-        description: "Kumpulan cerita pendek yang mengeksplorasi cara-cara aneh bagaimana orang berpikir tentang uang dan mengajarkan Anda bagaimana membuat keputusan keuangan yang lebih baik."
-    },
-    {
-        id: 9,
-        title: "The Seven Husbands of Evelyn Hugo",
-        author: "Taylor Jenkins Reid",
-        genre: "Fiction",
-        year: 2022,
-        rating: 4.6,
-        description: "Novel glamor tentang bintang film Hollywood yang legendaris dan gelap, Evelyn Hugo, yang memutuskan untuk menceritakan kisah hidupnya yang luar biasa kepada seorang jurnalis muda yang tidak dikenal."
-    },
-    {
-        id: 10,
-        title: "Thinking, Fast and Slow",
-        author: "Daniel Kahneman",
-        genre: "Science",
-        year: 2023,
-        rating: 4.4,
-        description: "Penelitian peraih Nobel tentang dua sistem yang mendorong cara kita berpikir: Sistem 1 yang cepat, intuitif, dan emosional; dan Sistem 2 yang lebih lambat, lebih deliberatif, dan lebih logis."
     }
 ];
 
@@ -211,10 +145,6 @@ function renderBooks(books) {
             <div class="book-info">
                 <h3 class="book-title">${book.title}</h3>
                 <p class="book-author">oleh ${book.author}</p>
-                <div class="book-rating">
-                    <span class="stars">${'⭐'.repeat(Math.floor(book.rating))}</span>
-                    <span class="rating-value">${book.rating}</span>
-                </div>
                 <div class="book-meta">
                     <span class="book-genre">${book.genre}</span>
                     <span class="book-year">${book.year}</span>
@@ -244,10 +174,6 @@ function showBookDetail(bookId) {
         <div class="modal-book-cover"></div>
         <h2 class="modal-book-title">${book.title}</h2>
         <p class="modal-book-author">oleh ${book.author}</p>
-        <div class="book-rating">
-            <span class="stars">${'⭐'.repeat(Math.floor(book.rating))}</span>
-            <span class="rating-value">${book.rating} / 5.0</span>
-        </div>
         <div class="modal-book-info">
             <div class="info-item">
                 <span class="info-label">Genre</span>
@@ -274,7 +200,6 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 function applyFilters(searchTerm = '') {
     const genreFilter = document.getElementById('genreFilter').value;
     const yearFilter = document.getElementById('yearFilter').value;
-    const ratingFilter = document.getElementById('ratingFilter').value;
     const sortFilter = document.getElementById('sortFilter').value;
     
     // Apply filters
@@ -285,7 +210,6 @@ function applyFilters(searchTerm = '') {
         
         const matchesGenre = genreFilter === '' || book.genre === genreFilter;
         const matchesYear = yearFilter === '' || book.year.toString() === yearFilter;
-        const matchesRating = ratingFilter === '' || book.rating >= parseFloat(ratingFilter);
         
         return matchesSearch && matchesGenre && matchesYear && matchesRating;
     });
@@ -295,8 +219,6 @@ function applyFilters(searchTerm = '') {
         filteredBooks.sort((a, b) => b.year - a.year);
     } else if (sortFilter === 'title') {
         filteredBooks.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortFilter === 'rating') {
-        filteredBooks.sort((a, b) => b.rating - a.rating);
     }
     
     renderBooks(filteredBooks);
@@ -305,7 +227,6 @@ function applyFilters(searchTerm = '') {
 // Add event listeners to filters
 document.getElementById('genreFilter').addEventListener('change', () => applyFilters(document.getElementById('searchInput').value.toLowerCase()));
 document.getElementById('yearFilter').addEventListener('change', () => applyFilters(document.getElementById('searchInput').value.toLowerCase()));
-document.getElementById('ratingFilter').addEventListener('change', () => applyFilters(document.getElementById('searchInput').value.toLowerCase()));
 document.getElementById('sortFilter').addEventListener('change', () => applyFilters(document.getElementById('searchInput').value.toLowerCase()));
 
 // Reset filters
@@ -313,7 +234,6 @@ document.getElementById('resetFilters').addEventListener('click', () => {
     document.getElementById('searchInput').value = '';
     document.getElementById('genreFilter').value = '';
     document.getElementById('yearFilter').value = '';
-    document.getElementById('ratingFilter').value = '';
     document.getElementById('sortFilter').value = 'newest';
     applyFilters();
 });
