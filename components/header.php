@@ -10,9 +10,17 @@
     <header class="header">
         <div class="container header-content">
             <div class="logo">
-                <h1>Perpustakaan PWEB</h1>
                 <p class="tagline">Perpustakaan PWEB</p>
             </div>
+
+            <nav>
+                <ul>
+                    <li><a href="">Beranda</a></li>
+                    <li><a href="">Katalog</a></li>
+                    <li><a href="">Peminjaman</a></li>
+                    <li><a href="">Login</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 </body>
