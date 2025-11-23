@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpustakaan PWEB</title>
     <link rel="icon" type="image/png" href="assets/img/Logo.png!sw800">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header class="header">
@@ -15,10 +20,10 @@
 
             <nav>
                 <ul>
-                    <li><a href="">Beranda</a></li>
+                    <li><a href="userHome.php">Beranda</a></li>
                     <li><a href="">Katalog</a></li>
                     <li><a href="">Peminjaman</a></li>
-                    <li><a href="">Login</a></li>
+                    <li><a href="">Profil</a></li>
                 </ul>
             </nav>
         </div>
