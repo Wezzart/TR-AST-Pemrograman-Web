@@ -20,10 +20,10 @@ session_start();
 
             <nav>
                 <ul>
-                    <li><a href="userHome.php">Beranda</a></li>
-                    <li><a href="">Katalog</a></li>
-                    <li><a href="">Peminjaman</a></li>
-                    <li><a href="">Profil</a></li>
+                    <li><a href="../../view/client/clientHome.php">Beranda</a></li>
+                    <li><a href="../../view/client/clientKatalog.php">Katalog</a></li>
+                    <li><a href="../../view/client/clientLend.php">Peminjaman</a></li>
+                    <li><a href="../../view/client/clientProfile.php">Profil</a></li>
                 </ul>
             </nav>
         </div>
