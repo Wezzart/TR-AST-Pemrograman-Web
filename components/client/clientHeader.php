@@ -8,14 +8,17 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpustakaan PWEB</title>
-    <link rel="icon" type="image/png" href="assets/img/Logo.png!sw800">
+    <link rel="icon" type="image/png" href="../../assets/img/Icon.png">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header class="header">
         <div class="container header-content">
             <div class="logo">
-                <p class="tagline">Perpustakaan PWEB</p>
+                <a href="../../view/client/clientHome.php">
+                    <img src="../../assets/img/Logo.png" alt="Logo PWEB">
+                    <p class="tagline">Perpustakaan PWEB</p>
+                </a>
             </div>
 
             <nav>
