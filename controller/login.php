@@ -16,7 +16,8 @@ if (isset($_POST['login'])) {
         $q_admin = $koneksi->prepare("SELECT * FROM admin WHERE username=?");
         $q_admin->bind_param("s", $username);
         $q_admin->execute();
-        if (mysqli_num_rows($q_admin) > 0) {
+        $result_admin = $q_admin->get_result(); // Get the actual result set
+        if ($result_admin->num_rows > 0) {
             $_SESSION['role'] = 'admin';
             header("Location: ../view/admin/adminHome.php");
             exit;
