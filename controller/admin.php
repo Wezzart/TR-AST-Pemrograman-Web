@@ -24,11 +24,11 @@ if(isset($_POST["tambahBuku"])){
     $stmt = $koneksi->prepare("INSERT INTO buku (id_buku,nama_buku,penulis_buku,genre_buku,jumlah_buku,tahun_terbit) VALUES (?, ?, ?, ?, ?, ?)"); 
     $stmt -> bind_param("ssssis",$idBuku,$namaBuku,$penulisBuku,$genreBuku,$jumlahBuku,$tahunTerbit);
     if ($stmt->execute()) {
-        header( "view/admin/adminHompage.php?status=success");
+        header( "Location: view/admin/adminHompage.php?status=success");
         $stmt->close();
         exit();
     } else {
-        header( "view/admin/adminHompage.php?status=failed");
+        header( "Location: view/admin/adminHompage.php?status=failed");
         $stmt->close();
         exit();
     }
@@ -45,11 +45,11 @@ if(isset($_POST["updateBuku"])){
     $stmt = $koneksi->prepare("UPDATE buku SET nama_buku = ?,penulis_buku =?,genreBuku =?, jumlah_buku=?,tahun_terbit =? WHERE id_buku =?");
     $stmt -> bind_param("sssiss",$namaBuku,$penulisBuku,$genreBuku,$jumlahBuku,$tahunTerbit,$idBuku);
     if ($stmt->execute()) {
-        header( "view/admin/adminHompage.php?status=success");
+        header( "Location: view/admin/adminHompage.php?status=success");
         $stmt->close();
         exit();
     } else {
-        header( "view/admin/adminHompage.php?status=failed");
+        header( "Location: view/admin/adminHompage.php?status=failed");
         $stmt->close();
         exit();
     }
@@ -60,11 +60,11 @@ if(isset($_GET["deleteBuku"])){
     $stmt = $koneksi->prepare("DELETE from buku WHERE id_buku = ?");
     $stmt-> bind_param("s",$idBuku);
     if ($stmt->execute()) {
-        header( "view/admin/adminHompage.php?status=success");
+        header( "Location: view/admin/adminHompage.php?status=success");
         $stmt->close();
         exit();
     } else {
-        header( "view/admin/adminHompage.php?status=failed");
+        header( "Location: view/admin/adminHompage.php?status=failed");
         $stmt->close();
         exit();
     }
@@ -91,20 +91,20 @@ if(isset($_POST["tambahAnggota"])){
     
     if ($stmt->execute()) { 
         if ($stmt2->execute()) {
-        header( "view/admin/adminHompage.php?status=success");
+        header( "Location: view/admin/adminHompage.php?status=success");
         $stmt->close();
         $stmt2->close();
         exit();
 
         } else {
-            header( "view/admin/adminHompage.php?status=failed");
+            header( "Location: view/admin/adminHompage.php?status=failed");
             $stmt->close();
             $stmt2->close();
             exit();
         }
 
     } else {
-        header( "view/admin/adminHompage.php?status=failed");
+        header( "Location: view/admin/adminHompage.php?status=failed");
         $stmt->close();
         exit();
     }
@@ -120,20 +120,20 @@ if(isset($_GET["deleteAnggota"])){
 
     if ($stmt->execute()) {
         if ($stmt2->execute()) {
-        header( "view/admin/adminHompage.php?status=success");
+        header( "Location: view/admin/adminHompage.php?status=success");
         $stmt->close();
         $stmt2->close();
         exit();
 
         } else {
-            header( "view/admin/adminHompage.php?status=failed");
+            header( "Location: view/admin/adminHompage.php?status=failed");
             $stmt->close();
             $stmt2->close();
             exit();
         }
 
     } else {
-        header( "view/admin/adminHompage.php?status=failed");
+        header( "Location: view/admin/adminHompage.php?status=failed");
         $stmt->close(); 
         exit();
     }

@@ -2,7 +2,7 @@
 session_start();
 require '../config/koneksiDB.php';
 if (isset($_POST['login'])) {
-    $username = $_POST['username'];
+    $username = $_POST['email'];
     $password = $_POST['password'];
     $stmt = $koneksi->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
     $stmt->bind_param("ss", $username, $password);

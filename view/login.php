@@ -17,7 +17,7 @@ include '../controller/login.php';
     <canvas id="particles"></canvas>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#" method="POST">
+            <form action="../controller/register.php" method="POST">
                 <h1>Create Account</h1>
                 <div class="infield">
                     <i class="fas fa-user input-icon"></i>
@@ -25,27 +25,27 @@ include '../controller/login.php';
                 </div>
                 <div class="infield">
                     <i class="fas fa-envelope input-icon"></i>
-                    <input type="email" placeholder="Email" name="email" required />
+                    <input type="text" placeholder="Email" name="email" required />
                 </div>
                 <div class="infield">
                     <i class="fas fa-lock input-icon"></i>
                     <input type="password" placeholder="Password" name="password" required />
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit" name="register">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#" method="POST">
+            <form action="../controller/login.php" method="POST">
                 <h1>Sign in</h1>
                 <div class="infield">
                     <i class="fas fa-user input-icon"></i>
-                    <input type="email" placeholder="Email" name="email" required />
+                    <input type="text" placeholder="Email" name="email" required />
                 </div>
                 <div class="infield">
                     <i class="fas fa-lock input-icon"></i>
                     <input type="password" placeholder="Password" name="password" required />
                 </div>
-                <button type="submit">Sign In</button>
+                <button type="submit" name ="login">Sign In</button>
             </form>
         </div>
         <div class="overlay-container">
