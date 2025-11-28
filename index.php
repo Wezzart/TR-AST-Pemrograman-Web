@@ -17,12 +17,12 @@
                 <h1 class="site-name">Perpustakaan PWEB</h1>
             </div>
             <div class="tagline">"Pengetahuan Adalah Sumber Kekuatan"</div>
-            <a href="controller/login.php">
+            <a href="view/login.php">
                 <button id="loginBtn">Login</button>
             </a>
         </div>
     </div>
 
-    <script src="assets/js/login.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

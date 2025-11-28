@@ -1,62 +1,44 @@
-document.addEventListener("DOMContentLoaded", () => {
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
 
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
+signUpButton.addEventListener('click', () => {
+    container.classList.add('right-panel-active');
+});
 
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener("resize", resize);
+signInButton.addEventListener('click', () => {
+    container.classList.remove('right-panel-active');
+});
 
-let particles = [];
-const particleCount = 30;
-
-class Particle {
-    constructor() {
-        this.reset();
-    }
-
-    reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1 + 0.7;
-        this.speedX = Math.random() * 0.3 - 0.1;
-        this.speedY = Math.random() * 0.3 - 0.1;
-    }
-
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-            this.reset();
-        }
-    }
-
-    draw() {
-        ctx.beginPath();
-        ctx.fillStyle = "rgba(212, 175, 55, 0.4)";
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
-
-for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-}
-
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach(p => {
-        p.update();
-        p.draw();
+const inputs = document.querySelectorAll('input');
+inputs.forEach(input => {
+    input.addEventListener('focus', function() {
+        this.parentElement.classList.add('focused');
     });
+    
+    input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('focused');
+    });
+});
 
-    requestAnimationFrame(animate);
-}
-animate();
-
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
 });
