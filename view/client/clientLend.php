@@ -21,6 +21,9 @@
         <div id="statusKembali"></div>
     </div>
 
+    <!-- buat footernya ges nanti codenya harus diatas ini -->
+    <?php require_once '../../components/client/clientFooter.php'; ?>
+
     <script src="../../assets/js/peminjaman.js"></script>
 </body>
 </html>

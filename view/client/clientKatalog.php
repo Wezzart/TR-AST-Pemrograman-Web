@@ -21,6 +21,9 @@
         <div id="hasilCari"></div>
     </div>
 
+    <!-- buat footernya ges nanti codenya harus diatas ini -->
+    <?php require_once '../../components/client/clientFooter.php'; ?>
+
     <script src="../../assets/js/katalog.js"></script>
 </body>
 </html>
