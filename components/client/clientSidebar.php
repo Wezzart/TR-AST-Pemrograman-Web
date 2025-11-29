@@ -8,15 +8,20 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="sidebar">
-        <h3>Filter Pencarian</h3>
-        <ul>
-            <li onclick="toggleDropdown('genreList')">Kategori</li>
-            <ul id="genreList" class="submenu">
-                <li>Fiksi</li>
-                <li>Non-Fiksi</li>
+    <div class="app-layout">
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <h2>Perpustakaan PWEB</h2>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"></a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
-        </ul>
+        </aside>
     </div>
 </body>
 </html>
