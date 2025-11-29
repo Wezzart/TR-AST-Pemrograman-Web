@@ -52,7 +52,7 @@ $pageTitle = isset($title) ? $title : "Perpustakaan PWEB";
                 <li class="nav-item">
                     <a href="../../view/client/clientLend.php" class="nav-link <?php echo ($currentPage == 'clientLend.php') ? 'active' : ''; ?>">
                         <i class="fas fa-handshake"></i>
-                        <span>Peminjaman</span>
+                        <span>Buku yang Dipinjam</span>
                     </a>
                 </li>
                 <li class="nav-item profile-dropdown">

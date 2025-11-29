@@ -15,13 +15,37 @@ if (isset($_POST["cariBuku"])) {
     $stmt->bind_param("s", $searchTerm);
     $stmt->execute();
     $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        while ($buku = $result->fetch_assoc()) {
-            echo json_encode($buku);
-        }
+    
+    $books = [];
+    while ($buku = $result->fetch_assoc()) {
+        $books[] = $buku;
+    }
+    
+    if (count($books) > 0) {
+        echo json_encode($books);
     } else {
         echo json_encode(["message" => "Buku tidak ditemukan"]);
     }
+    $stmt->close();
+}
+
+if (isset($_POST["getBukuPinjaman"])) {
+    $username = $_SESSION["username"];
+    
+    // JOIN table pinjam_buku dengan buku untuk mendapat detail buku
+    $stmt = $koneksi->prepare("SELECT b.*, p.username FROM pinjam_buku p 
+                               JOIN buku b ON p.id_buku = b.id_buku 
+                               WHERE p.username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $books = [];
+    while ($buku = $result->fetch_assoc()) {
+        $books[] = $buku;
+    }
+    
+    echo json_encode($books);
     $stmt->close();
 }
 
