@@ -1,3 +1,12 @@
+<?php
+session_start();
+require '../../config/koneksiDB.php';
+
+if(!isset($_SESSION['role']) || $_SESSION['role'] != 'anggota'){
+     header("Location: ../login.php");
+     exit;
+ }
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
