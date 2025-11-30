@@ -163,4 +163,48 @@ if(isset($_POST["kembalikanBuku"])){
     }
     $q_buku->close();
 }
+
+if (isset($_POST["getProfileData"])) {
+    $username = $_SESSION["username"];
+    
+    $stmt = $koneksi->prepare("SELECT u.username, u.role, 
+                               (SELECT COUNT(*) FROM pinjam_buku WHERE username = u.username) as total_pinjam
+                               FROM user u WHERE u.username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        echo json_encode($result->fetch_assoc());
+    } else {
+        echo json_encode(["error" => "User not found"]);
+    }
+    $stmt->close();
+}
+
+if (isset($_POST["changePassword"])) {
+    $username = $_SESSION["username"];
+    $oldPassword = $_POST["oldPassword"];
+    $newPassword = $_POST["newPassword"];
+    
+    $stmt = $koneksi->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
+    $stmt->bind_param("ss", $username, $oldPassword);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $updateStmt = $koneksi->prepare("UPDATE user SET password = ? WHERE username = ?");
+        $updateStmt->bind_param("ss", $newPassword, $username);
+        
+        if ($updateStmt->execute()) {
+            echo json_encode(["status" => "success", "message" => "Password berhasil diubah"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Gagal mengubah password"]);
+        }
+        $updateStmt->close();
+    } else {
+        echo json_encode(["status" => "error", "message" => "Password lama salah"]);
+    }
+    $stmt->close();
+}
 ?>
