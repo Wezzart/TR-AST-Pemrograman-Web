@@ -62,12 +62,12 @@ $pageTitle = isset($title) ? $title : "Perpustakaan PWEB";
                         <i class="fas fa-chevron-down" style="font-size: 0.8rem;"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="../../view/client/profile.php" class="dropdown-item">
+                        <a href="#" class="dropdown-item">
                             <i class="fas fa-user"></i>
                             <span>My Profile</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="../../controller/logout.php" class="dropdown-item">
+                        <a href="../../index.php" class="dropdown-item">
                             <i class="fas fa-sign-out-alt"></i>
                             <span>Logout</span>
                         </a>
