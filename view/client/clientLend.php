@@ -6,24 +6,24 @@
     <title>Peminjaman Saya - Perpustakaan PWEB</title>
     <?php require_once '../../components/client/clientHeader.php'; ?>
     <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/page/client.css">
 </head>
 <body>
+    <canvas id="particles"></canvas>
     <div class="container">
         <h1>Buku yang Saya Pinjam</h1>
         
-        <!-- Tombol refresh list -->
-        <button onclick="loadBukuPinjaman()" style="margin-bottom: 20px;">Refresh List</button>
+        <button name="refresh" onclick="loadBukuPinjaman()" class="btn-pinjam" style="margin-bottom: 20px; max-width: 300px;">Refresh List</button>
         
-        <!-- List buku yang dipinjam -->
         <div id="listBukuPinjaman"></div>
         
-        <!-- Status message -->
         <div id="statusKembali"></div>
     </div>
 
     <!-- buat footernya ges nanti codenya harus diatas ini -->
     <?php require_once '../../components/client/clientFooter.php'; ?>
 
+    <script src="../../assets/js/script.js"></script>
     <script src="../../assets/js/peminjaman.js"></script>
 </body>
 </html>

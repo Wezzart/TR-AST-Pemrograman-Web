@@ -1,15 +1,34 @@
+// Fungsi untuk load genre options
+function loadGenres() {
+    const formData = new FormData();
+    formData.append('getGenres', '1');
+    
+    fetch('../../controller/user.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(genres => {
+        const select = document.getElementById('genreFilter');
+        genres.forEach(genre => {
+            const option = document.createElement('option');
+            option.value = genre;
+            option.textContent = genre;
+            select.appendChild(option);
+        });
+    })
+    .catch(error => console.error('Error loading genres:', error));
+}
+
 // Fungsi untuk mencari buku
 function cariBuku() {
     const namaBuku = document.getElementById('namaBuku').value;
-    
-    if (!namaBuku.trim()) {
-        alert('Masukkan nama buku untuk dicari');
-        return;
-    }
+    const genre = document.getElementById('genreFilter').value;
     
     const formData = new FormData();
     formData.append('cariBuku', '1');
     formData.append('namaBuku', namaBuku);
+    formData.append('genre', genre);
     
     fetch('../../controller/user.php', {
         method: 'POST',
@@ -19,20 +38,15 @@ function cariBuku() {
     .then(data => {
         const hasil = document.getElementById('hasilCari');
         
-        if (data.message) {
-            hasil.innerHTML = `<p class="error">${data.message}</p>`;
+        if (Array.isArray(data) && data.length > 0) {
+            let html = '<div class="book-list">';
+            data.forEach(buku => {
+                html += createBookCard(buku);
+            });
+            html += '</div>';
+            hasil.innerHTML = html;
         } else {
-            if (Array.isArray(data)) {
-                let html = '<div class="book-list">';
-                data.forEach(buku => {
-                    html += createBookCard(buku);
-                });
-                html += '</div>';
-                hasil.innerHTML = html;
-            } else {
-                // Single result
-                hasil.innerHTML = createBookCard(data);
-            }
+            hasil.innerHTML = '<p class="no-data">Tidak ada buku ditemukan.</p>';
         }
     })
     .catch(error => {
@@ -89,14 +103,26 @@ function pinjamBuku(namaBuku) {
     });
 }
 
-// Event listener untuk Enter key pada input search
 document.addEventListener('DOMContentLoaded', function() {
+    loadGenres();
+    cariBuku();
     const searchInput = document.getElementById('namaBuku');
     if (searchInput) {
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 cariBuku();
             }
+        });
+        searchInput.addEventListener('input', function() {
+            cariBuku();
+        });
+    }
+    
+    // Auto-search saat genre berubah
+    const genreFilter = document.getElementById('genreFilter');
+    if (genreFilter) {
+        genreFilter.addEventListener('change', function() {
+            cariBuku();
         });
     }
 });

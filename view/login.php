@@ -37,6 +37,13 @@ include '../controller/login.php';
         <div class="form-container sign-in-container">
             <form action="../controller/login.php" method="POST">
                 <h1>Sign in</h1>
+                
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="error-message" style="color: #ff4444; background: #ffdddd; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                        Username atau Password Salah!
+                    </div>
+                <?php endif; ?>
+                
                 <div class="infield">
                     <i class="fas fa-user input-icon"></i>
                     <input type="text" placeholder="Email" name="email" required />

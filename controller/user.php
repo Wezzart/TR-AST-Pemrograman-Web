@@ -9,10 +9,32 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != 'anggota'){
 
 if (isset($_POST["cariBuku"])) {
     $namaBuku = $_POST["namaBuku"];
+    $genre = isset($_POST["genre"]) ? $_POST["genre"] : "";
     
-    $stmt = $koneksi->prepare("SELECT * FROM buku WHERE nama_buku LIKE ?");
-    $searchTerm = "%$namaBuku%";
-    $stmt->bind_param("s", $searchTerm);
+    // Build query dengan kondisi dinamis
+    if (!empty($genre) && $genre !== "all") {
+        if (!empty($namaBuku)) {
+            // Filter by nama dan genre
+            $stmt = $koneksi->prepare("SELECT * FROM buku WHERE nama_buku LIKE ? AND genre_buku = ?");
+            $searchTerm = "%$namaBuku%";
+            $stmt->bind_param("ss", $searchTerm, $genre);
+        } else {
+            // Filter by genre saja
+            $stmt = $koneksi->prepare("SELECT * FROM buku WHERE genre_buku = ?");
+            $stmt->bind_param("s", $genre);
+        }
+    } else {
+        if (!empty($namaBuku)) {
+            // Filter by nama saja
+            $stmt = $koneksi->prepare("SELECT * FROM buku WHERE nama_buku LIKE ?");
+            $searchTerm = "%$namaBuku%";
+            $stmt->bind_param("s", $searchTerm);
+        } else {
+            // Show semua buku
+            $stmt = $koneksi->prepare("SELECT * FROM buku");
+        }
+    }
+    
     $stmt->execute();
     $result = $stmt->get_result();
     
@@ -21,18 +43,27 @@ if (isset($_POST["cariBuku"])) {
         $books[] = $buku;
     }
     
-    if (count($books) > 0) {
-        echo json_encode($books);
-    } else {
-        echo json_encode(["message" => "Buku tidak ditemukan"]);
+    echo json_encode($books);
+    $stmt->close();
+}
+
+if (isset($_POST["getGenres"])) {
+    // Get daftar genre yang tersedia
+    $stmt = $koneksi->prepare("SELECT DISTINCT genre_buku FROM buku ORDER BY genre_buku");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $genres = [];
+    while ($row = $result->fetch_assoc()) {
+        $genres[] = $row['genre_buku'];
     }
+    
+    echo json_encode($genres);
     $stmt->close();
 }
 
 if (isset($_POST["getBukuPinjaman"])) {
     $username = $_SESSION["username"];
-    
-    // JOIN table pinjam_buku dengan buku untuk mendapat detail buku
     $stmt = $koneksi->prepare("SELECT b.*, p.username FROM pinjam_buku p 
                                JOIN buku b ON p.id_buku = b.id_buku 
                                WHERE p.username = ?");

@@ -27,10 +27,8 @@ if (isset($_POST['login'])) {
             exit;
         }
     } else {
-        echo "<script>
-            alert('Username atau Password Salah');
-            window.location = 'login.php';
-        </script>";
+        header("Location: ../view/login.php?error=1");
+        exit;
     }
 }
 ?>
