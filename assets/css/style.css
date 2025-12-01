@@ -19,6 +19,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    background: linear-gradient(135deg, #0a1628 0%, #1a2942 100%);
 }
 
 main {
