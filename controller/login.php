@@ -1,7 +1,6 @@
 <?php
 session_start();
 require '../config/koneksiDB.php';
-
 if (isset($_POST['login'])) {
     $username = $_POST['email'];
     $password = $_POST['password'];

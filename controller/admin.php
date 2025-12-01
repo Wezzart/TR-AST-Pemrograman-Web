@@ -7,11 +7,6 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != 'admin'){
     exit;
 }
 
-if(!isset($_GET['doc'])) {
-    $userInputDoc = $_GET['doc'];
-    $safeDocName = basename($userInputDoc);
-}
-
 $username =  $_SESSION['username'];
 $buku = mysqli_query($koneksi, "SELECT * from buku");
 $anggota = mysqli_query($koneksi, "SELECT * FROM anggota");

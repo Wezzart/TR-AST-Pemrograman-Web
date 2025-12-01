@@ -2,11 +2,6 @@
 session_start();
 require '../config/koneksiDB.php';
 
-if(!isset($_GET['doc'])) {
-    $userInputDoc = $_GET['doc'];
-    $safeDocName = basename($userInputDoc);
-}
-
 if(!isset($_SESSION['role']) || $_SESSION['role'] != 'anggota'){
      header("Location: login.php");
      exit;
@@ -16,21 +11,26 @@ if (isset($_POST["cariBuku"])) {
     $namaBuku = $_POST["namaBuku"];
     $genre = isset($_POST["genre"]) ? $_POST["genre"] : "";
     
+    // Build query dengan kondisi dinamis
     if (!empty($genre) && $genre !== "all") {
         if (!empty($namaBuku)) {
+            // Filter by nama dan genre
             $stmt = $koneksi->prepare("SELECT * FROM buku WHERE nama_buku LIKE ? AND genre_buku = ?");
             $searchTerm = "%$namaBuku%";
             $stmt->bind_param("ss", $searchTerm, $genre);
         } else {
+            // Filter by genre saja
             $stmt = $koneksi->prepare("SELECT * FROM buku WHERE genre_buku = ?");
             $stmt->bind_param("s", $genre);
         }
     } else {
         if (!empty($namaBuku)) {
+            // Filter by nama saja
             $stmt = $koneksi->prepare("SELECT * FROM buku WHERE nama_buku LIKE ?");
             $searchTerm = "%$namaBuku%";
             $stmt->bind_param("s", $searchTerm);
         } else {
+            // Show semua buku
             $stmt = $koneksi->prepare("SELECT * FROM buku");
         }
     }
@@ -48,6 +48,7 @@ if (isset($_POST["cariBuku"])) {
 }
 
 if (isset($_POST["getGenres"])) {
+    // Get daftar genre yang tersedia
     $stmt = $koneksi->prepare("SELECT DISTINCT genre_buku FROM buku ORDER BY genre_buku");
     $stmt->execute();
     $result = $stmt->get_result();
@@ -96,6 +97,7 @@ if (isset($_POST["pinjamBuku"])){
         if ($jumlahBuku <= 0) {
             echo json_encode(["status" => "error", "message" => "Stok buku kosong, silahkan pilih buku lain"]);
         } else {
+            // Update jumlah buku
             $newJumlah = $jumlahBuku - 1;
             $updateBuku = $koneksi->prepare("UPDATE buku SET jumlah_buku = ? WHERE nama_buku = ?");
             $updateBuku->bind_param("is", $newJumlah, $namaBuku);
