@@ -20,6 +20,10 @@ body {
     display: flex;
     flex-direction: column;
     background: linear-gradient(135deg, #0a1628 0%, #1a2942 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 main {

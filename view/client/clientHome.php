@@ -21,7 +21,7 @@ $userName = isset($_SESSION['name']) ? $_SESSION['name'] : 'Anggota';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
-    <main style="flex: 1"></main>
+    <canvas id="particles"></canvas>
         <div class="home-container">
             <div class="welcome-section">
                 <div class="greeting-banner">
@@ -85,5 +85,6 @@ $userName = isset($_SESSION['name']) ? $_SESSION['name'] : 'Anggota';
     <?php require_once '../../components/client/clientFooter.php'; ?>
     
     <script src="../../assets/js/home.js"></script>
+    <script src="../../assets/js/script.js"></script>
 </body>
 </html>
