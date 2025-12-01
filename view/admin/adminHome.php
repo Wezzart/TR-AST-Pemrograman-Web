@@ -2,13 +2,11 @@
 session_start();
 require_once '../../config/koneksiDB.php';
 
-// security cek
 if(!isset($_SESSION['role']) || $_SESSION['role'] != 'admin'){
     header("Location: ../login.php");
     exit;
 }
 
-// fetch data
 $buku = mysqli_query($koneksi, "SELECT * from buku");
 $anggota = mysqli_query($koneksi, "SELECT * FROM anggota");
 $pinjam = mysqli_query($koneksi, "SELECT * FROM pinjam_buku");
